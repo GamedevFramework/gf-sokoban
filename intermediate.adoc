@@ -1,0 +1,8 @@
+= Intermediate Tutorial for Gamedev Framework
+Julien Bernard <julien.bernard@univ-fcomte.fr>
+v0.1
+:toc:
+:homepage: https://gamedevframework.github.io/
+:stem: latexmath
+:source-highlighter: coderay
+:xrefstyle: full
