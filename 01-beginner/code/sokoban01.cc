@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <vector>
 
 #include <gf/Array2D.h>
@@ -9,8 +10,12 @@
 #include <gf/Vector.h>
 #include <gf/Window.h>
 
+// tag::ns[]
 namespace skb {
 
+// end::ns[]
+
+  // tag::data[]
   const char LevelData[] = {
     "  #####"
     "###@ .#"
@@ -23,10 +28,17 @@ namespace skb {
 
   constexpr gf::Vector2i LevelSize = gf::vec(7, 7);
 
+  // end::data[]
+
+  // tag::hero[]
   struct Hero {
     gf::Vector2i position;
   };
 
+  // end::hero[]
+
+
+  // tag::make_hero[]
   Hero makeHero(gf::Span<const char> data, gf::Vector2i size) {
     Hero hero = { gf::vec(0, 0) };
     gf::Vector2i position = gf::vec(0, 0);
@@ -46,6 +58,8 @@ namespace skb {
 
     return hero;
   }
+
+  // end::make_hero[]
 
   struct Boxes {
     std::vector<gf::Vector2i> positions;
@@ -124,6 +138,8 @@ namespace skb {
         case '#':
           level.blocks(position) = Block::Wall;
           break;
+        case '\0':
+          break;
         default:
           assert(false);
           break;
@@ -140,7 +156,9 @@ namespace skb {
     return level;
   }
 
+// tag::ns[]
 }
+// end::ns[]
 
 
 int main() {
@@ -193,6 +211,12 @@ int main() {
           if (level.blocks(behind) != skb::Wall && !boxes.hasBox(behind)) {
             hero.position = target;
             boxes.changeBox(target, behind);
+
+            if (std::all_of(boxes.positions.begin(), boxes.positions.end(), [&level](gf::Vector2i coordinates) {
+              return level.blocks(coordinates) == skb::Block::Goal;
+            })) {
+              return 0;
+            }
           }
         } else {
           hero.position = target;

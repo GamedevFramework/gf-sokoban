@@ -4,8 +4,10 @@ v0.1
 :toc:
 :homepage: https://gamedevframework.github.io/
 :stem: latexmath
-:source-highlighter: coderay
+:source-highlighter: rouge
 :xrefstyle: full
+
+Welcome in the tutorial for Gamedev Framework. In this tutorial, we are going to learn how to create a game with Gamedev Framework. The game is https://en.wikipedia.org/wiki/Sokoban[Sokoban].
 
 == Journey
 

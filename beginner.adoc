@@ -4,5 +4,67 @@ v0.1
 :toc:
 :homepage: https://gamedevframework.github.io/
 :stem: latexmath
-:source-highlighter: coderay
+:source-highlighter: rouge
 :xrefstyle: full
+
+This tutorial is a step-by-step construction of Sokoban with Gamedev Framework. In this beginner tutorial, we will understand the basics of game development and use the minimal features of Gamedev Framework.
+
+
+== Project Setup
+
+.Structure of the project
+* `/`: root directory of the project
+** `/code/`: directory for the source code
+*** `sokoban01.cc`: the single file for this tutorial
+** `/CMakeLists.txt`: the build instructions
+
+
+.Minimal source code
+[source,c++]
+----
+include::01-beginner/code/template01.cc[]
+----
+
+
+.The associated `CMakeLists.txt`
+[source,cmake]
+----
+include::01-beginner/CMakeLists.txt[]
+----
+
+== Development
+
+=== Namespace
+
+.Namespace
+[source,c++]
+----
+include::01-beginner/code/sokoban01.cc[tag=ns]
+----
+
+=== Data
+
+.Data
+[source,c++]
+----
+include::01-beginner/code/sokoban01.cc[tags=data;ns]
+----
+
+=== Structures
+
+.Hero
+[source,c++]
+----
+include::01-beginner/code/sokoban01.cc[tags=hero;ns]
+----
+
+
+=== Structures Instanciation
+
+.Hero Instanciation
+[source,c++]
+----
+include::01-beginner/code/sokoban01.cc[tags=make_hero;ns]
+----
+
+

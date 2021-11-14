@@ -4,5 +4,39 @@ v0.1
 :toc:
 :homepage: https://gamedevframework.github.io/
 :stem: latexmath
-:source-highlighter: coderay
+:source-highlighter: rouge
 :xrefstyle: full
+
+We analyse Sokoban in an agnostic way, not depending on the underlying technology. This analysis will be the base for the three parts of the tutorial.
+
+
+== Rules of Sokoban
+
+https://en.wikipedia.org/wiki/Sokoban[Sokoban] is a puzzle game. The goal for the player is to push boxes on their places in a room. The player can only push the boxes, and can only push one at a time.
+
+
+== Entities in Sokoban
+
+There are three main entities in Sokoban: the level, the hero and the boxes.
+
+=== Level
+
+The level is a 2D array representing the room. Each cell in the array can be either a wall, a goal or a (non-goal) floor. The locations of the hero and the boxes are not coded in this entity because it would had some complexities. The level has a single attribute:
+
+- `blocks` that is a 2D array of block properties (`Wall`, `Goal` or `Floor`)
+
+=== Hero
+
+The hero has a single attribute:
+
+- `position` that indicates its position in the room.
+
+=== Boxes
+
+Boxes, like the hero, are represented by their position in the room. Hence the structure for the boxes has a single attribute too:
+
+- `positions` that is an array of positions in the room, one for each box.
+
+== Graphics for Sokoban
+
+The goal of this tutorial is not to teach graphics. So we will use the excellent graphics from https://kenney.nl/[Kenney.nl] and especially the https://kenney.nl/assets/sokoban[assets for sokoban].

@@ -4,5 +4,13 @@ v0.1
 :toc:
 :homepage: https://gamedevframework.github.io/
 :stem: latexmath
-:source-highlighter: coderay
+:source-highlighter: rouge
 :xrefstyle: full
+
+Things to talk about:
+
+- `gf::View`
+- `gf::Action`
+- `gf::ResourceManager`
+
+
