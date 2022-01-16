@@ -107,7 +107,7 @@ namespace skb {
   }
 
 
-  enum Block {
+  enum class Block {
     Wall,
     Goal,
     Floor,
@@ -208,7 +208,7 @@ int main() {
         if (boxes.hasBox(target)) {
           gf::Vector2i behind = target + gf::displacement(direction);
 
-          if (level.blocks(behind) != skb::Wall && !boxes.hasBox(behind)) {
+          if (level.blocks(behind) != skb::Block::Wall && !boxes.hasBox(behind)) {
             hero.position = target;
             boxes.changeBox(target, behind);
 

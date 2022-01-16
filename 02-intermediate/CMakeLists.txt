@@ -15,6 +15,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/code/config.h.in ${CMAKE_CURRENT_BINA
 add_executable(sokoban02
   code/sokoban02.cc
   code/bits/Boxes.cc
+  code/bits/Data.cc
   code/bits/Hero.cc
   code/bits/Level.cc
 )
