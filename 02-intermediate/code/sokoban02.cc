@@ -19,7 +19,38 @@
 
 namespace {
 
+  const char Level0Data[] = {
+    "    #####          "
+    "    #   #          "
+    "    #$  #          "
+    "  ###  $##         "
+    "  #  $ $ #         "
+    "### # ## #   ######"
+    "#   # ## #####  ..#"
+    "# $  $          ..#"
+    "##### ### #@##  ..#"
+    "    #     #########"
+    "    #######        "
+  };
+
+  constexpr gf::Vector2i Level0Size = gf::vec(19, 11);
+
   const char Level1Data[] = {
+    "  ##### "
+    "###   # "
+    "#.@$  # "
+    "### $.# "
+    "#.##$ # "
+    "# # . ##"
+    "#$ *$$.#"
+    "#   .  #"
+    "########"
+  };
+
+  constexpr gf::Vector2i Level1Size = gf::vec(8, 9);
+
+
+  const char Level2Data[] = {
     "  #####"
     "###@ .#"
     "# $ #.#"
@@ -29,7 +60,7 @@ namespace {
     "#######"
   };
 
-  constexpr gf::Vector2i Level1Size = gf::vec(7, 7);
+  constexpr gf::Vector2i Level2Size = gf::vec(7, 7);
 
 }
 
@@ -98,11 +129,21 @@ int main() {
   downAction.addScancodeKeyControl(gf::Scancode::Down);
   actions.addAction(downAction);
 
+  gf::Action resetAction("Reset");
+  resetAction.addKeycodeKeyControl(gf::Keycode::R);
+  actions.addAction(resetAction);
+
   // entities
 
-  skb::Data level1(Level1Data, Level1Size);
+  std::size_t currentLevelIndex = 0;
 
-  skb::Data *currentLevel = &level1;
+  skb::Data levels[] = {
+    skb::Data(Level0Data, Level0Size),
+    skb::Data(Level1Data, Level1Size),
+    skb::Data(Level2Data, Level2Size),
+  };
+
+  skb::Data *currentLevel = &levels[currentLevelIndex];
 
   gf::EntityContainer mainEntities;
   // add entities to mainEntities
@@ -158,6 +199,11 @@ int main() {
       // do something
     }
 
+    if (resetAction.isActive()) {
+      boxes.setData(*currentLevel);
+      level.setData(*currentLevel);
+      hero.setData(*currentLevel);
+    }
 
     // 2. update
 
@@ -165,6 +211,18 @@ int main() {
     mainEntities.update(time);
     hudEntities.update(time);
 
+    if (level.isFinished()) {
+      ++currentLevelIndex;
+
+      if (currentLevelIndex == std::size(levels)) {
+        break;
+      }
+
+      currentLevel = &levels[currentLevelIndex];
+      boxes.setData(*currentLevel);
+      level.setData(*currentLevel);
+      hero.setData(*currentLevel);
+    }
 
     // 3. draw
 
